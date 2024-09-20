@@ -29,14 +29,14 @@ const LoginForm = ({ toggleForm }) => {
             console.log('Login successful:', data); // Loguear éxito para diagnóstico
             // Navegar según el rol del usuario
             switch (data.rol) {
-                case 'Admin':
+                case 'admin':
                     navigate('/admin');
                     break;
-                case 'Representante':
+                case 'representante':
                     console.log("Usuario en local storage:", localStorage.getItem('user'));
                     navigate('/representante');
                     break;
-                case 'Comprador':
+                case 'comprador':
                     navigate('/');
                     break;
                 default:
