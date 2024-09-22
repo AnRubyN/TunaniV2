@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 
+
 .register-container {
     display: flex;
     min-height: 100vh;
@@ -7,19 +8,27 @@
     align-items: center;
     justify-content: center; /* Centrado en lugar de a la izquierda */
     background-color: #ffffff; /* Mantenemos el fondo blanco */
-    padding-right: 65vh;
-
+    padding-right: 100vh;
 }
 
-.form-container {
+.form-container-reg {   /*FORMULARIO PARA REGISTRO*/
     width: 100%;
-    max-width: 400px;
+    max-width: 40rem;
     padding: 2rem;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera para definir el formulario */
     margin: auto; /* Asegura que el formulario esté centrado */
-    position: relative; /* Para la posición de la flecha de navegación */
+    display: flex;
+    flex-direction: row;
+}
+
+.primero{
+    margin-right: 1rem;
+}
+
+.segundo{
+    margin-top: 2.2rem;
 }
 
 .register-form {
@@ -28,15 +37,27 @@
     justify-content: center;
 }
 
-.form-title {
+.form-title-reg {
     font-size: 2rem;
     color: #4D4078;
     margin-bottom: 1rem;
-    text-align: center;
+    margin-right: 1rem;
+    text-align: left;
 }
 
+/*AJUSTE DE LABEL E INPUTS ESPECÍFICOS (CHECHKBOX LABEL Y MÉTODO DE PAGO)*/
+.tamano{
+    font-size: .8rem;
+}
+.ajuste{
+    margin-top: 2.5rem;
+}
+/*FIN DE AJUSTES ESPECIFICOS ESPECIFICO*/
+
 .form-field {
-    margin-bottom: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 .input-label {
@@ -50,7 +71,7 @@
     font-family: 'Montserrat', sans-serif;
     padding: 0.75rem;
     border: 1px solid #4D4078;
-    border-radius: 4px;
+    border-radius: .3rem;
     font-size: 1rem;
     width: 100%;
 }
@@ -98,6 +119,10 @@
     display: inline-block;
     cursor: pointer;
   }
+
+  .tamanocheck{
+    font-size: 1rem;
+  }
   
   /* Style for when the checkbox is checked */
   .checkbox:checked::before {
@@ -132,7 +157,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-
+    margin-top: .5rem;
 }
 
 
@@ -157,6 +182,7 @@
     font-size: 0.875rem;
     text-align: center;
     margin-top: 1rem;
+    margin-right: 2rem;
 }
 
 .signup-link-anchor {

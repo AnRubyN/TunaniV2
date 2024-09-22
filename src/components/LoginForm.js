@@ -78,7 +78,13 @@ const LoginForm = ({ toggleForm }) => {
                             className="input-field"
                             required
                         />
-                   
+                        <label className='tamano'>
+                        <input
+                            type="checkbox"
+                            checked={showPassword}
+                            onChange={() => setShowPassword(!showPassword)}
+                        /> Mostrar Contraseña
+                        </label>
                     </div>
                     <button type="submit" className="submit-button">Iniciar Sesión</button>
                     <div className="signup-link">¿No tienes cuenta? <span onClick={toggleForm} className="signup-link-anchor">Registrarse</span></div>

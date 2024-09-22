@@ -9,7 +9,7 @@ const RepresentanteLayout = () => {
   return (
     <div className="app">
       <header>
-        <ComponenteHeaderSidebar />
+        <ComponenteHeaderSidebar/>
       </header>
       <div className="main-content-wrapper"> {/* Replaced <body> tag with <div> */}
         <ComponenteSidebar />

@@ -114,8 +114,10 @@ const RegisterForm = ({ toggleForm }) => {
 
     return (
         <div className="register-container">
-            <form onSubmit={handleSubmit} className="form-container">
-                <h2 className="form-title">Registrarse</h2>
+            <form onSubmit={handleSubmit} className="form-container-reg">
+                
+            <section className='primero'>
+                <h2 className="form-title-reg">Registrarse</h2>
                 {error && <div className="notification error-message">{error}</div>}
                 {registerMessage && <div className="notification register-message">{registerMessage}</div>}
                 <div className="form-field">
@@ -131,29 +133,31 @@ const RegisterForm = ({ toggleForm }) => {
                 <div className="form-field">
                     <label>Contraseña:</label>
                     <input
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         value={contrasenia}
                         onChange={(e) => setContrasenia(e.target.value)}
                         className="input-field"
-                        placeholder="Mínimo 8 caracteres, letras y números"
+                        placeholder="Mínimo 8 caracteres, letras, números"
                     />
-                        <label>
+                        <label className='tamano'>
                         <input
                             type="checkbox"
                             checked={showPassword}
-                            onChange={(e) => setShowPassword(e.target.checked)}
+                            onChange={() => setShowPassword(!showPassword)}
                         /> Mostrar Contraseña
-                    </label>
+                        </label>
                 </div>
                 <div className="form-field">
                     <label>Nombre Completo:</label>
                     <input
                         type="text"
                         className="input-field"
-                        placeholder="Nombre (segundo nombre opcional) Apellido Paterno Apellido Materno"
+                        placeholder="Nombre(s) Ap. Paterno Ap. Materno"
                         onChange={handleChangeNombreCompleto}
                     />
                 </div>
+            </section>
+            <section className='segundo'>
                 <div className="form-field">
                     <label>Teléfono:</label>
                     <input
@@ -174,6 +178,7 @@ const RegisterForm = ({ toggleForm }) => {
                         placeholder="Clave de Elector"
                     />
                 </div>
+                <div className='ajuste'>
                 <div className="form-field">
                     <label>Método de Pago:</label>
                     <input
@@ -184,7 +189,9 @@ const RegisterForm = ({ toggleForm }) => {
                         placeholder="Por definir"
                     />
                 </div>
-                <div className="form-field">
+                </div>
+                
+                <div className="tamanocheck">
                     <label>
                         <input
                             type="checkbox"
@@ -197,6 +204,9 @@ const RegisterForm = ({ toggleForm }) => {
                 </div>
                 <button type="submit" className="submit-button">Registrarse</button>
                 <div className="signup-link">¿Ya tienes cuenta? <span onClick={toggleForm} className="signup-link-anchor">Iniciar Sesión</span></div>
+            </section>
+                
+                
             </form>
             <div className="image-container">
                 {/* Image is set as a background in CSS */}
