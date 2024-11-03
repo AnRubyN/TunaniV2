@@ -20,29 +20,55 @@ const [sortDirection, setSortDirection] = useState("asc");
 const [searchTerm, setSearchTerm] = useState("");
 
 
-  // Suponiendo que ya tienes un estado para la cooperativa o su ID
-  const [cooperativas, setCooperativas] = useState([]);
+  // Estado para los artesanos y la cooperativa
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [cooperativa, setCooperativa] = useState([]);
   const [cooperativaSeleccionada, setCooperativaSeleccionada] = useState("");
+  const [usuarioId, setUsuarioId] = useState(localStorage.getItem("userId"));
+  
+
+
 
   useEffect(() => {
-    fetchArtesanos();
-    fetchCooperativas();
-  }, []);
-
-  const fetchCooperativas = async () => {
-    try {
-      const response = await axios.get(
-        "https://tunaniback-0bd56842295c.herokuapp.com/api/cooperativas/"
-      );
-      setCooperativas(response.data);
-    } catch (error) {
-      mostrarMensaje("error", "Error al obtener las cooperativas.");
+    if (!usuarioId) {
+      setError("No se encontró el ID del usuario en localStorage");
+      setLoading(false);
+      return;
     }
-  };
+    const fetchData = async () => {
+      try {
+        // Obtener la cooperativa asociada al usuario
+        const responseCooperativa = await axios.get(
+          `https://tunaniback-0bd56842295c.herokuapp.com/api/cooperativa/${usuarioId}/`
+        );
+        const cooperativaData = responseCooperativa.data;
+        setCooperativa(cooperativaData);
 
-  const fetchArtesanos = async () => {
+        const cooperativaId = cooperativaData.id;
+
+        // Obtener los artesanos de la cooperativa
+        const responseArtesanos = await axios.get(
+          `https://tunaniback-0bd56842295c.herokuapp.com/api/cooperativas/${cooperativaId}/artesanos/`
+        );
+        setArtesanos(responseArtesanos.data);
+
+        setLoading(false);
+      } catch (err) {
+        setError("Error al cargar la información: " + err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [usuarioId]);
+
+
+
+  const fetchArtesanos = async (cooperativaId) => {
     try {
-      const response = await axios.get("https://tunaniback-0bd56842295c.herokuapp.com/api/artesanos/");
+      const response = await axios.get(`https://tunaniback-0bd56842295c.herokuapp.com/api/cooperativas/${cooperativaId}/artesanos/`);
       setArtesanos(response.data);
     } catch (error) {
       mostrarMensaje("error", "Error al obtener los artesanos.");
@@ -108,7 +134,7 @@ const [searchTerm, setSearchTerm] = useState("");
       numero_tarjeta,
       enfoque,
       descripcion,
-      cooperativa: cooperativaSeleccionada, // Cambiado a cooperativa_id
+      cooperativa: cooperativa ? cooperativa.id : cooperativaSeleccionada, // [Cambio solamente en la línea] Usar el ID de la cooperativa actual si está disponible
     };
     if (estaEditando) {
       try {
@@ -137,7 +163,7 @@ const [searchTerm, setSearchTerm] = useState("");
     //cerrar ventana modal al terminar la edicion
     closeModal();
     setIdArtesanoEditando(null);
-    fetchArtesanos(); // Recargar la lista después de agregar o editar
+    fetchArtesanos(cooperativa ? cooperativa.id : cooperativaSeleccionada); // Recargar la lista después de agregar o editar
   };
 
   const eliminarArtesano = async (id) => {
@@ -530,17 +556,20 @@ const filteredAndSortedArtesanos = artesanos
                   Cooperativa<span> *</span>
                 </label>
                 <select
-                  id="cooperativa"
-                  value={cooperativaSeleccionada}
-                  onChange={(e) => setCooperativaSeleccionada(e.target.value)}
-                >
-                  <option value="">Seleccione una cooperativa</option>
-                  {cooperativas.map((cooperativa) => (
-                    <option key={cooperativa.id} value={cooperativa.id}>
-                      {cooperativa.nombre}
-                    </option>
-                  ))}
-                </select>
+  id="cooperativa"
+  value={cooperativaSeleccionada}
+  onChange={(e) => setCooperativaSeleccionada(e.target.value)}
+  disabled={!!cooperativaSeleccionada} // Deshabilitar si ya hay una cooperativa seleccionada
+>
+  <option value="">Seleccione una cooperativa</option>
+  {cooperativa && cooperativa.id && (
+    <option key={cooperativa.id} value={cooperativa.id}>
+      {cooperativa.nombre}
+    </option>
+  )}
+</select>
+
+
               </div>
               <div className="acciones-formulario">
                 <button onClick={agregarOEditarArtesano}>

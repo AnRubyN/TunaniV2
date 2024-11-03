@@ -10,6 +10,8 @@ const PerfilProducto = ({ initialProductoId }) => {
   const [artesanos, setArtesanos] = useState([]); // Definir el estado para artesanos
   const fileInputRefs = useRef({}); // Para almacenar referencias a los inputs de archivos
 
+  const [isAddingProduct, setIsAddingProduct] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [files, setFiles] = useState([]);
@@ -17,6 +19,8 @@ const PerfilProducto = ({ initialProductoId }) => {
   const [isImageEditing, setIsImageEditing] = useState(false);
   const [alertMessage, setAlertMessage] = useState(null);
   const [newProduct, setNewProduct] = useState({
+    
+    
     nombre: "",
     precio: "",
     material: "",
@@ -24,9 +28,9 @@ const PerfilProducto = ({ initialProductoId }) => {
     descripcion: "",
   });
 
+  const [newProductId, setNewProductId] = useState(null); // Guardar el ID del nuevo producto
+
   useEffect(() => {
-
-
     const fetchData = async () => {
       if (cooperativaId) {
         try {
@@ -36,7 +40,6 @@ const PerfilProducto = ({ initialProductoId }) => {
           const productosData = response.data;
           setProductos(productosData);
           
-
           // Seleccionar el primer producto si no se proporciona `initialProductoId`
           const selectedProducto = initialProductoId
             ? productosData.find(p => p.id === initialProductoId)
@@ -47,19 +50,18 @@ const PerfilProducto = ({ initialProductoId }) => {
           } else {
             setError("No se encontró ningún producto para esta cooperativa.");
           }
-                  // Fetch de artesanos
-        const responseArtesanos = await axios.get(
-          'https://tunaniback-0bd56842295c.herokuapp.com/api/artesanos/'
-        );
-        setArtesanos(responseArtesanos.data);
         
+          // Fetch de artesanos
+          const responseArtesanos = await axios.get(
+            `https://tunaniback-0bd56842295c.herokuapp.com/api/cooperativas/${cooperativaId}/artesanos/`
+          );
+          setArtesanos(responseArtesanos.data);
+          
           setLoading(false);
         } catch (err) {
           setError("Error al cargar la información: " + err.message);
           setLoading(false);
         }
-
-        
       }
     };
 
@@ -143,6 +145,31 @@ const PerfilProducto = ({ initialProductoId }) => {
       }
     }
   };
+
+  const handleImageUploadEdited = async (productoId, event) => {
+    const files = event.target.files;
+
+    if (files.length > 0) {
+      const imageFormData = new FormData();
+      Array.from(files).forEach((file) => imageFormData.append("imagen", file));
+
+      try {
+        await axios.put(
+          `https://tunaniback-0bd56842295c.herokuapp.com/api/imagenes-producto/actualizar/${productoId}/`,
+          imageFormData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        mostrarMensaje("success", "Imágenes subidas correctamente.");
+      } catch (err) {
+        mostrarMensaje("error", "Error al subir las imágenes: " + err.message);
+      }
+    }
+  };
+
   const handleDataSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -155,7 +182,7 @@ const PerfilProducto = ({ initialProductoId }) => {
     });
 
     try {
-      const response = await axios.patch(
+      const response = await axios.put(
         `https://tunaniback-0bd56842295c.herokuapp.com/api/productos/actualizar/${producto.id}/`,
         updateFormData,
         {
@@ -198,13 +225,9 @@ const PerfilProducto = ({ initialProductoId }) => {
 
       setProductos((prev) => [...prev, productoCreado]);
       mostrarMensaje("success", "Producto agregado correctamente.");
-          // Llamar a la función para subir imágenes después de agregar el producto
-
-    // Luego, si hay imágenes seleccionadas, subirlas
-    if (files.length > 0) {
-      await subirImagenesProducto(productoCreado.id);
-    }
-    
+      setNewProductId(productoCreado.id); // Guardar el ID del nuevo producto
+      setIsImageEditing(true);
+      setIsAddingProduct(false);
       setNewProduct({
         nombre: "",
         precio: "",
@@ -238,38 +261,9 @@ const PerfilProducto = ({ initialProductoId }) => {
     }
   };
 
-
-  // Nueva función para subir imágenes de un producto específico
-const subirImagenesProducto = async (productoId) => {
-  if (files.length > 0) {
-    const imageFormData = new FormData();
-    files.forEach((file) => imageFormData.append("imagen", file));
-
-    try {
-      const response = await axios.post(
-        `https://tunaniback-0bd56842295c.herokuapp.com/api/productos/${productoId}/agregar-fotos/`,
-        imageFormData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      mostrarMensaje("success", "Imágenes subidas correctamente.");
-
-      // Actualizar el producto con las nuevas imágenes
-      setProductos((prev) =>
-        prev.map((prod) =>
-          prod.id === productoId ? { ...prod, fotos: response.data } : prod
-        )
-      );
-
-    } catch (err) {
-      mostrarMensaje("error", "Error al subir las imágenes: " + err.message);
-    }
-  }
-};
+  const toggleAddProductModal = () => {
+    setIsAddingProduct((prev) => !prev);
+  };
 
   if (loading) return <div id="cargando"></div>;
   if (error || cooperativaError) return <p>Error al cargar: {error || cooperativaError}</p>;
@@ -278,68 +272,94 @@ const subirImagenesProducto = async (productoId) => {
     return <div>No se ha encontrado la información del producto.</div>;
   }
 
-
   return (
     <div>
-      <div className="cuadro">
-        <h2>{isEditing ? "Editar Producto" : "Agregar Producto"}</h2><br/>
-        <h4>Nombre *</h4>
-        <input className="cajas" name="nombre" value={newProduct.nombre} onChange={handleNewProductChange} placeholder="Nombre" /><br/>
-        <h4>Precio *</h4>
-        <input className="cajas" type="text" name="precio" value={newProduct.precio} onChange={handleNewProductChange} placeholder="Precio" /><br/>
-        <h4>Descripción</h4>
-        <input className="cajas" name="descripcion" value={newProduct.descripcion} onChange={handleNewProductChange} placeholder="Descripción" /><br/>
-        <h4>Material *</h4>
-        <input className="cajas" name="material" value={newProduct.material} onChange={handleNewProductChange} placeholder="Material" /><br/>
-        <h4>Stock *</h4>
-        <input className="cajas" type="number" name="stock" value={newProduct.stock} onChange={handleNewProductChange} placeholder="Stock" /><br/>
-        <h4>Categoría *</h4>
-        <input className="cajas" name="categoria" value={newProduct.categoria || ""} onChange={handleNewProductChange} placeholder="Categoría" /><br/>
-        <input type="file" name="imagen" onChange={handleImageChange} multiple />
-        <div>
-        <h4>Artesano *</h4>
-        <select className="cajas" name="artesano" value={newProduct.artesano || ""} onChange={handleNewProductChange}>
-          <option value="">Seleccione un artesano</option>
-          {artesanos.map((artesano) => (
-            <option key={artesano.id} value={artesano.id}>{artesano.nombre}</option>
-          ))}
-        </select><br/>
+      <button onClick={toggleAddProductModal}>
+        {isAddingProduct ? "Cancelar" : "Agregar Producto"}
+      </button>
+
+      {isAddingProduct && (
+        <div className="modal">
+          <h2>Paso 1: Agrega los detalles de tu producto</h2><br/>
+          <h4>Nombre *</h4>
+          <input className="cajas" name="nombre" value={newProduct.nombre} onChange={handleNewProductChange} placeholder="Nombre" /><br/>
+          <h4>Precio *</h4>
+          <input className="cajas" type="text" name="precio" value={newProduct.precio} onChange={handleNewProductChange} placeholder="Precio" /><br/>
+          <h4>Descripción</h4>
+          <input className="cajas" name="descripcion" value={newProduct.descripcion} onChange={handleNewProductChange} placeholder="Descripción" /><br/>
+          <h4>Material *</h4>
+          <input className="cajas" name="material" value={newProduct.material} onChange={handleNewProductChange} placeholder="Material" /><br/>
+          <h4>Stock *</h4>
+          <input className="cajas" type="number" name="stock" value={newProduct.stock} onChange={handleNewProductChange} placeholder="Stock" /><br/>
+          <h4>Categoría *</h4>
+          <input className="cajas" name="categoria" value={newProduct.categoria || ""} onChange={handleNewProductChange} placeholder="Categoría" /><br/>
+          <h4>Artesano *</h4>
+          <select className="cajas" name="artesano" value={newProduct.artesano || ""} onChange={handleNewProductChange}>
+            <option value="">Seleccione un artesano</option>
+            {artesanos.map((artesano) => (
+              <option key={artesano.id} value={artesano.id}>{artesano.nombre}</option>
+            ))}
+          </select><br/>
           <h4>Estado *</h4>
           <select className="seleccion" name="estado" value={newProduct.estado} onChange={handleNewProductChange}>
             <option value="publicado">Publicado</option>
             <option value="no_publicado">No Publicado</option>
-          </select>
+          </select><br/>
+          <button className="botones" onClick={handleNewProductSubmit}>
+            ✎ Agregar Producto
+          </button>
         </div>
-        <button className="botones" onClick={handleNewProductSubmit}>
-          ✎ Agregar
-        </button>
-      </div><br/>
+      )}
 
-      <div id="productos-lista">
-        <h2>Productos de la Cooperativa</h2>
-        {productos.length > 0 ? (
-          productos.map((prod) => (
-            <div key={prod.id} className="producto-item">
-              <h3>{prod.nombre}</h3>
-              <p><strong>Precio:</strong> {prod.precio}</p>
-              <p><strong>Material:</strong> {prod.material}</p>
-              <p><strong>Stock:</strong> {prod.stock}</p>
-              <p><strong>Descripción:</strong> {prod.descripcion}</p>
-              <div className="producto-imagenes">
-                {prod.fotos && prod.fotos.map((foto) => (
-                  <img
-                    key={foto.id}
-                    src={foto.ubicacion || "URL_DE_IMAGEN_POR_DEFECTO"}
-                    alt={`Imagen de ${prod.nombre}`}
-                  />
-                ))}
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No hay productos disponibles.</p>
-        )}
-      </div>
+{isImageEditing && (
+        <div className="modal">
+          <h2>Paso 2: Agregar Imágenes</h2>
+          <input
+            type="file"
+            multiple
+            onChange={(event) => handleImageUpload(newProductId, event)}
+          /><br/>
+          <button className="botones" onClick={() => setIsImageEditing(false)}>
+            Subir Imágenes
+          </button>
+        </div>
+      )}
+
+{isEditing && (
+        <div className="modal">
+          <h2>Editar Producto</h2><br/>
+          <h4>Nombre *</h4>
+          <input className="cajas" name="nombre" value={producto?.nombre || ""} onChange={handleDataChange} placeholder="Nombre" /><br/>
+          <h4>Precio *</h4>
+          <input className="cajas" type="text" name="precio" value={producto?.precio || ""} onChange={handleDataChange} placeholder="Precio" /><br/>
+          <h4>Descripción</h4>
+          <input className="cajas" name="descripcion" value={producto?.descripcion || ""} onChange={handleDataChange} placeholder="Descripción" /><br/>
+          <h4>Material *</h4>
+          <input className="cajas" name="material" value={producto?.material || ""} onChange={handleDataChange} placeholder="Material" /><br/>
+          <h4>Stock *</h4>
+          <input className="cajas" type="number" name="stock" value={producto?.stock || ""} onChange={handleDataChange} placeholder="Stock" /><br/>
+          <h4>Categoría *</h4>
+          <input className="cajas" name="categoria" value={producto?.categoria || ""} onChange={handleDataChange} placeholder="Categoría" /><br/>
+          <h4>Artesano *</h4>
+          <select className="cajas" name="artesano" value={producto?.artesano || ""} onChange={handleDataChange}>
+            <option value="">Seleccione un artesano</option>
+            {artesanos.map((artesano) => (
+              <option key={artesano.id} value={artesano.id}>{artesano.nombre}</option>
+            ))}
+          </select><br/>
+          <h4>Estado *</h4>
+          <select className="seleccion" name="estado" value={producto?.estado || ""} onChange={handleDataChange}>
+            <option value="publicado">Publicado</option>
+            <option value="no_publicado">No Publicado</option>
+          </select><br/>
+          <button className="botones" onClick={handleDataSubmit}>
+            ✎ Guardar Cambios
+          </button>
+          <button className="botones" onClick={() => setIsEditing(false)}>
+            Cerrar
+          </button>
+        </div>
+      )}
 
       <table border="1">
         <thead>
@@ -388,7 +408,7 @@ const subirImagenesProducto = async (productoId) => {
                 multiple
                 style={{ display: "none" }}
                 ref={(el) => (fileInputRefs.current[producto.id] = el)} // Referenciar el input por producto
-                onChange={(event) => handleImageUpload(producto.id, event)}
+                onChange={(event) => handleImageUploadEdited(producto.id, event)}
               />
                 <button
                 className="botones"

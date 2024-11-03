@@ -25,10 +25,14 @@ const ComponenteCooperativa = () => {
         const responseCooperativa = await axios.get(
           `https://tunaniback-0bd56842295c.herokuapp.com/api/cooperativa/${usuarioId}/`
         );
-        setCooperativa(responseCooperativa.data);
+        const cooperativaData = responseCooperativa.data;
+        setCooperativa(cooperativaData);
+
+        const cooperativaId = cooperativaData.id;
+
 
         const responseArtesanos = await axios.get(
-          `https://tunaniback-0bd56842295c.herokuapp.com/api/artesanos/`
+          `https://tunaniback-0bd56842295c.herokuapp.com/api/cooperativas/${cooperativaId}/artesanos/`
         );
         setArtesanos(responseArtesanos.data);
 
