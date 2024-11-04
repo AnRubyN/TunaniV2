@@ -1,9 +1,7 @@
 /* Estilos base para el contenedor de paquetería */
 .apartado-paqueteria-container {
-  background-color: #f4f4f4; /* color de fondo suave */
-  padding: 3%; /* espacio alrededor de los contenidos internos */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1%;
+  padding-top: 5%;
   font-family: 'Arial', sans-serif;
 }
 
@@ -114,4 +112,54 @@
 
 .alert.error {
   background-color: #f44336;
+}
+
+.paqueterias-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content:first baseline;
+}
+
+.paqueteria-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 300px;
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.paqueteria-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.paqueteria-card h3 {
+  margin: 0;
+  color: #873286;
+}
+
+.paqueteria-card p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.boton-editar {
+  background-color: #873286;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.boton-editar:hover {
+  background-color: #6d276c;
 }

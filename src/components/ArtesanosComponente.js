@@ -285,65 +285,42 @@ const filteredAndSortedArtesanos = artesanos
     <div className="apartado-artesanos-container">
       <div className="titulo-boton-agregar-container">
         <h2 id="titulo-perfil-artesanos">Artesanos Registrados</h2>
-        <button onClick={openModal}> 🞣 Agregar Artesano</button>
       </div>
-      <div className="search-container">
+  <div className="search-container">
   <input
     type="text"
-    placeholder="Buscar..."
+    placeholder="🔍︎ Buscar Artesano..."
     value={searchTerm}
     onChange={(e) => setSearchTerm(e.target.value)}
   />
+          <button onClick={openModal}> 🞣 Agregar Artesano</button>
+
 </div>
-<table>
-  <thead>
-    <tr>
-      <th onClick={() => handleSort("nombre")}>Nombre</th>
-      <th onClick={() => handleSort("apellido_paterno")}>Apellido Paterno</th>
-      <th onClick={() => handleSort("apellido_materno")}>Apellido Materno</th>
-      <th onClick={() => handleSort("tel")}>Teléfono</th>
-      <th onClick={() => handleSort("email")}>Email</th>
-      <th onClick={() => handleSort("rfc")}>RFC</th>
-      <th onClick={() => handleSort("ine")}>INE</th>
-      <th onClick={() => handleSort("numero_tarjeta")}>Número de Tarjeta</th>
-      <th onClick={() => handleSort("enfoque")}>Enfoque</th>
-      <th onClick={() => handleSort("descripcion")}>Descripción</th>
-      <th onClick={() => handleSort("cooperativa")}>Cooperativa</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    {filteredAndSortedArtesanos.map((artesano) => (
-      <tr key={artesano.id}>
-        <td>{artesano.nombre}</td>
-        <td>{artesano.apellido_paterno}</td>
-        <td>{artesano.apellido_materno}</td>
-        <td>{artesano.tel}</td>
-        <td>{artesano.email}</td>
-        <td>{artesano.rfc}</td>
-        <td>{artesano.ine}</td>
-        <td>{artesano.numero_tarjeta}</td>
-        <td>{artesano.enfoque}</td>
-        <td>{artesano.descripcion}</td>
-        <td>{artesano.cooperativa}</td>
-        <td>
-          <button
-            id="boton-editar"
-            onClick={() => iniciarEdicion(artesano)}
-          >
-            ✎ Editar
-          </button>
-          <button
-            id="boton-eliminar"
-            onClick={() => eliminarArtesano(artesano.id)}
-          >
-            🗑 Eliminar
-          </button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+<div className="artesanos-container">
+  {filteredAndSortedArtesanos.map((artesano) => (
+    <div className="artesano-card" key={artesano.id}>
+      <h3> {artesano.nombre} {artesano.apellido_paterno} {artesano.apellido_materno}</h3>
+      <p><strong>🕾: </strong> {artesano.tel}</p>
+      <p><strong>✉:</strong> {artesano.email}</p>
+      <p><strong>RFC:</strong> {artesano.rfc}</p>
+      <p><strong>INE:</strong> {artesano.ine}</p>
+      <p><strong>Número de Tarjeta:</strong> {artesano.numero_tarjeta}</p>
+      <p><strong>Enfoque:</strong> {artesano.enfoque}</p>
+      <p id="descripción-artesanos">"{artesano.descripcion}"</p>
+      <p><strong>Cooperativa:</strong> {artesano.cooperativa}</p>
+      <div className="acciones-botones-artesanos">
+        <button id="boton-editar" onClick={() => iniciarEdicion(artesano)}>
+          ✎ Editar
+        </button>
+        <button id="boton-eliminar" onClick={() => eliminarArtesano(artesano.id)}>
+          🗑 Eliminar
+        </button>
+      </div>
+    </div>
+    
+
+  ))}
+</div>
 
       {/*form para agregar y editar*/}
 

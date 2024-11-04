@@ -157,17 +157,26 @@ const ComponentePaqueteria = () => {
 
     return (
         <div className='apartado-paqueteria-container'>
-            <h2 id='titulo-paqueteria'>Información de la Paquetería</h2>
+            <h2 id='titulo-paqueteria'>Paqueterías Registradas</h2>
             <div>
+                    <button onClick={handleAddClick}>Añadir Nueva Paquetería</button>
+                </div>
+            <div className='paqueterias-container'>
                 {paqueterias.map((item) => (
-                    <div key={item.id} className='paqueteria-item'>
-                        <p>{item.nombre} - {item.estado} - {item.email} - {item.tel} - {item.servicio_ofrecido}</p>
-                        <button onClick={() => handleEdit(item)}>Editar</button>
+                    <div key={item.id} className='paqueteria-card'>
+                        <h3>📦︎ {item.nombre}</h3>
+                        <p><strong>Estado:</strong> {item.estado}</p>
+                        <p><strong>Municipio:</strong> {item.municipio}</p>
+                        <p><strong>Teléfono:</strong> {item.tel}</p>
+                        <p><strong>Email:</strong> {item.email}</p>
+                        <p><strong>Servicio Ofrecido:</strong> {item.servicio_ofrecido}</p>
+                        <button onClick={() => handleEdit(item)} className='boton-editar'>Editar</button>
                     </div>
                 ))}
             </div>
             {isEditing ? (
-                <div className='formulario-paqueteria-container'>
+                 <div className="modal-backdrop">
+          <div className="modal-content">
                     <form onSubmit={handleSubmit}>
                         {Object.entries(paqueteria).map(([key, value]) => {
                             if (key !== 'id') {
@@ -191,6 +200,8 @@ const ComponentePaqueteria = () => {
                         </div>
                     </form>
                 </div>
+                </div>
+                
             ) : (
                 <div>
                     <button onClick={handleAddClick}>Añadir Nueva Paquetería</button>

@@ -1,5 +1,5 @@
 .apartado-artesanos-container{
-    padding: 3%;
+    padding: 1%;
     padding-top: 5%;
 }
 
@@ -15,36 +15,15 @@ span {
     /*margin-bottom: 1.8rem;*/
     margin-right: auto; /* Esto asegurará que el título se alinee a la izquierda y el botón a la derecha */  }
 
-  .titulo-boton-agregar-container {
-   display: flex; /* Asegúrate de usar 'flex' y no 'flexbox' */
-    justify-content: space-between; /* Esto separará el título y el botón */
-    align-items: center; /* Alinea verticalmente el texto y el botón */
-    margin-bottom: 3rem;
-  }
+  
 
-  .titulo-boton-agregar-container button{
-   padding: 10px 15px; /* Ajusta el relleno para que el botón sea más grande */
-    font-size: 0.9rem; /* Ajusta el tamaño del texto dentro del botón */
-    cursor: pointer;
-    font-family: 'Century Gothic', Arial, sans-serif;
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    background-color: #873286; /* Asegúrate de que este color coincida con tu diseño */
-    text-transform: uppercase; /* Si el botón en la imagen está en mayúsculas */
-}
 
-.titulo-boton-agregar-container button:hover{
-   transform: scale(1.05); /* Aumenta ligeramente el tamaño de la imagen */
-}
 
 
  #boton-editar, #boton-eliminar{
-    margin: 2px;
-    width: 70px;
-    height: 25px;
+    margin: 1px;
+    width: auto;
+    height: auto;
     font-size: small;
     cursor: pointer;
     font-family: 'Century Gothic', Arial, sans-serif; /* Arial y sans-serif son alternativas */
@@ -69,45 +48,7 @@ span {
     transform: scale(1.05); /* Aumenta ligeramente el tamaño de la imagen */
  }
 
- 
-table {
-   width: 100%;
-   border-collapse: collapse;/*elimina el espacio entre los bordes de las celda*/
-   margin-bottom: 20px;
-   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-   font-size: small;
-}
 
-/*<th> para encabezados y <td> para datos*/
-th, td { 
-   text-align: center;
-   padding: 12px 15px; /*añade espaciado interno alrededor del contenido de las celdas.*/
-   border-bottom: 1px solid #e0e0e0;
-}
-
-/*celdas del encabezado (<th> dentro de <thead>):*/
-thead th {
-   background-color: #873286;
-   color: #ffffff;
-}
-
-/*se alterna el color de fondo para las filas pares e impares de la tabla*/
-tbody tr:nth-child(even) {
-   background-color: #f2f2f7;
-}
-
-tbody tr:nth-child(odd) {
-   background-color: #E5D4FE;
-}
-
-tbody tr:last-child td {
-   border-bottom: none;
-}
-
-/*quita los bordes de la ultima fila y columna*/
-th:last-child, td:last-child {
-   border-right: none;
-}
 
 .formulario-agregar-editar-artesano{
   padding: 20px;
@@ -199,5 +140,95 @@ th:last-child, td:last-child {
  
  
 
+ .artesanos-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+   justify-content: first baseline;
+ }
+ 
+ .artesano-card {
+   display: flex;
+   flex-direction: column; /* Asegura que los elementos estén en columna */
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   padding: 15px;
+   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+   width: 280px;
+   background-color: #ffffff;
+   transition: transform 0.3s, box-shadow 0.3s;
+
+   
+ }
+
+ .artesano-card:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+ }
+ 
+ .artesano-card h3 {
+   margin: 0 0 10px;
+   color: #6d276c;
+ }
+ 
+ .artesano-card p {
+   margin: 1px;
+   padding-left: 5px;
+   font-size: 0.9rem; /* Ajusta el tamaño del texto dentro del botón */
+ }
+ 
+ .acciones-botones-artesanos {
+   display: flex;
+   padding-top: 15px;
+   justify-content: end;
+
+   gap: 5px;
+ }
+ 
+ .search-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 20px;
+ }
+ 
+ .search-container input[type="text"] {
+   width: 60%; /* Ajusta el ancho según sea necesario */
+   padding: 8px;
+   border-radius: 15px;
+   border: 1px solid #ccc;
+   font-size: small;
+   font-family: 'Century Gothic', Arial, sans-serif;
+   outline: none;
+ }
+ 
+ .search-container button {
+   padding: 10px 15px; /* Ajusta el relleno para que el botón sea más grande */
+   font-size: 0.8rem; /* Ajusta el tamaño del texto dentro del botón */
+    cursor: pointer;
+    font-family: 'Century Gothic', Arial, sans-serif;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    background-color: #873286; /* Asegúrate de que este color coincida con tu diseño */
+    text-transform: uppercase; /* Si el botón en la imagen está en mayúsculas */
+ }
+ 
+ .search-container button:hover {
+   transform: scale(1.05); /* Aumenta ligeramente el tamaño de la imagen */
+   background-color: #6d276c; /* Asegúrate de que este color coincida con tu diseño */
+
+ }
+ 
+ #descripción-artesanos {
+ height: 60px;
+ padding-top: 5px;
+ font-style: italic;
+color: #333;
+ 
+
+ }
 
    

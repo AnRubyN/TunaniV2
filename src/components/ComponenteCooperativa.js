@@ -168,10 +168,9 @@ const ComponenteCooperativa = () => {
       <div id="foto-cooperativa">
         <img
           src={
-            cooperativa.imagen_url ||
-            "https://static.vecteezy.com/system/resources/previews/007/319/940/non_2x/group-user-profile-icon-vector.jpg"
+            cooperativa.imagen_url || "https://es.freelogodesign.org/logo-ideas/cooperativa"
           }
-          alt="Foto Representante"
+          alt="Foto Coperativa"
         />
       </div>
       <div className="contenedor-boton-cambiar-imagen">

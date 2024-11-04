@@ -3,6 +3,8 @@ import axios from "axios";
 import "../styles/ComponenteGestionProductos.css";
 import useCooperativaId from '../hooks/useCooperativaId'; // Importar el hook personalizado
 
+
+
 const PerfilProducto = ({ initialProductoId }) => {
   const { cooperativaId, error: cooperativaError } = useCooperativaId();
   const [productos, setProductos] = useState([]);
@@ -265,162 +267,309 @@ const PerfilProducto = ({ initialProductoId }) => {
     setIsAddingProduct((prev) => !prev);
   };
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredProductos = productos.filter((producto) =>
+    Object.values(producto)
+      .join(" ")
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
+  
+
+
   if (loading) return <div id="cargando"></div>;
   if (error || cooperativaError) return <p>Error al cargar: {error || cooperativaError}</p>;
 
   if (!producto) {
-    return <div>No se ha encontrado la información del producto.</div>;
+    return <div>
+       No se ha encontrado la información del producto.
+      </div>;
   }
 
+
   return (
-    <div>
+    <div className="apartado-artesanias-container">
+      <div className="titulo-boton-agregar-container">
+        <h2 id="titulo-artesanias">Artesanias Registradas</h2>
+      </div>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="🔍︎ Buscar Producto..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       <button onClick={toggleAddProductModal}>
-        {isAddingProduct ? "Cancelar" : "Agregar Producto"}
+        {isAddingProduct ? "Cancelar" : "🞣 Agregar Producto"}
       </button>
 
+      </div>
+      
+
       {isAddingProduct && (
-        <div className="modal">
-          <h2>Paso 1: Agrega los detalles de tu producto</h2><br/>
+        <div className="modal-backdrop">
+        <div className="modal-content">
+          <h2>Paso 1: Agrega los detalles de tu producto</h2>
+          <br />
           <h4>Nombre *</h4>
-          <input className="cajas" name="nombre" value={newProduct.nombre} onChange={handleNewProductChange} placeholder="Nombre" /><br/>
+          <input
+            className="cajas"
+            name="nombre"
+            value={newProduct.nombre}
+            onChange={handleNewProductChange}
+            placeholder="Nombre"
+          />
+          <br />
           <h4>Precio *</h4>
-          <input className="cajas" type="text" name="precio" value={newProduct.precio} onChange={handleNewProductChange} placeholder="Precio" /><br/>
+          <input
+            className="cajas"
+            type="text"
+            name="precio"
+            value={newProduct.precio}
+            onChange={handleNewProductChange}
+            placeholder="Precio"
+          />
+          <br />
           <h4>Descripción</h4>
-          <input className="cajas" name="descripcion" value={newProduct.descripcion} onChange={handleNewProductChange} placeholder="Descripción" /><br/>
+          <input
+            className="cajas"
+            id="Descripción"
+            name="descripcion"
+            value={newProduct.descripcion}
+            onChange={handleNewProductChange}
+            placeholder="Descripción (255 caracteres máximo)"
+            maxLength={255}
+
+          />
+          <br />
           <h4>Material *</h4>
-          <input className="cajas" name="material" value={newProduct.material} onChange={handleNewProductChange} placeholder="Material" /><br/>
+          <input
+            className="cajas"
+            name="material"
+            value={newProduct.material}
+            onChange={handleNewProductChange}
+            placeholder="Material"
+          />
+          <br />
           <h4>Stock *</h4>
-          <input className="cajas" type="number" name="stock" value={newProduct.stock} onChange={handleNewProductChange} placeholder="Stock" /><br/>
+          <input
+            className="cajas"
+            type="number"
+            name="stock"
+            value={newProduct.stock}
+            onChange={handleNewProductChange}
+            placeholder="Stock"
+          />
+          <br />
           <h4>Categoría *</h4>
-          <input className="cajas" name="categoria" value={newProduct.categoria || ""} onChange={handleNewProductChange} placeholder="Categoría" /><br/>
+          <input
+            className="cajas"
+            name="categoria"
+            value={newProduct.categoria || ""}
+            onChange={handleNewProductChange}
+            placeholder="Categoría"
+          />
+          <br />
           <h4>Artesano *</h4>
-          <select className="cajas" name="artesano" value={newProduct.artesano || ""} onChange={handleNewProductChange}>
+          <select
+            className="cajas"
+            name="artesano"
+            value={newProduct.artesano || ""}
+            onChange={handleNewProductChange}
+          >
             <option value="">Seleccione un artesano</option>
             {artesanos.map((artesano) => (
-              <option key={artesano.id} value={artesano.id}>{artesano.nombre}</option>
+              <option key={artesano.id} value={artesano.id}>
+                {artesano.nombre}
+              </option>
             ))}
-          </select><br/>
+          </select>
+          <br />
           <h4>Estado *</h4>
-          <select className="seleccion" name="estado" value={newProduct.estado} onChange={handleNewProductChange}>
+          <select
+            className="seleccion"
+            name="estado"
+            value={newProduct.estado}
+            onChange={handleNewProductChange}
+          >
             <option value="publicado">Publicado</option>
             <option value="no_publicado">No Publicado</option>
-          </select><br/>
-          <button className="botones" onClick={handleNewProductSubmit}>
+          </select>
+          <br />
+
+          <div className="acciones-formulario">
+          <button  onClick={handleNewProductSubmit}>
             ✎ Agregar Producto
           </button>
+          <button onClick={() => setIsAddingProduct(false)}>
+            Cerrar
+          </button>
+          </div>
+
+        </div>
         </div>
       )}
 
-{isImageEditing && (
-        <div className="modal">
+      {isImageEditing && (
+        <div className="modal-backdrop">
+        <div className="modal-content">
           <h2>Paso 2: Agregar Imágenes</h2>
+          <p>Selelecione 5 fotografias</p>
+
+          <div className="contenedor-subir-imagen">
+
           <input
             type="file"
             multiple
             onChange={(event) => handleImageUpload(newProductId, event)}
-          /><br/>
-          <button className="botones" onClick={() => setIsImageEditing(false)}>
-            Subir Imágenes
+          />
+          <br />
+          </div>
+          <div className="acciones-formulario">
+          <button  onClick={() => setIsImageEditing(false)}>
+          🖫 Guardar Imagenes
           </button>
+           <button type="button" onClick={() => setIsImageEditing(false)}>✖ Cancelar</button>
+
+
+        </div>
+        </div>
         </div>
       )}
 
-{isEditing && (
-        <div className="modal">
-          <h2>Editar Producto</h2><br/>
+      {isEditing && (
+        <div className="modal-backdrop">
+        <div className="modal-content">
+          <h2>Editar Producto</h2>
+          <br />
           <h4>Nombre *</h4>
-          <input className="cajas" name="nombre" value={producto?.nombre || ""} onChange={handleDataChange} placeholder="Nombre" /><br/>
+          <input
+            className="cajas"
+            name="nombre"
+            value={producto?.nombre || ""}
+            onChange={handleDataChange}
+            placeholder="Nombre"
+          />
+          <br />
           <h4>Precio *</h4>
-          <input className="cajas" type="text" name="precio" value={producto?.precio || ""} onChange={handleDataChange} placeholder="Precio" /><br/>
+          <input
+            className="cajas"
+            type="text"
+            name="precio"
+            value={producto?.precio || ""}
+            onChange={handleDataChange}
+            placeholder="Precio"
+          />
+          <br />
           <h4>Descripción</h4>
-          <input className="cajas" name="descripcion" value={producto?.descripcion || ""} onChange={handleDataChange} placeholder="Descripción" /><br/>
+          <input
+            className="cajas"
+            name="descripcion"
+            value={producto?.descripcion || ""}
+            onChange={handleDataChange}
+            placeholder="Descripción"
+          />
+          <br />
           <h4>Material *</h4>
-          <input className="cajas" name="material" value={producto?.material || ""} onChange={handleDataChange} placeholder="Material" /><br/>
+          <input
+            className="cajas"
+            name="material"
+            value={producto?.material || ""}
+            onChange={handleDataChange}
+            placeholder="Material"
+          />
+          <br />
           <h4>Stock *</h4>
-          <input className="cajas" type="number" name="stock" value={producto?.stock || ""} onChange={handleDataChange} placeholder="Stock" /><br/>
+          <input
+            className="cajas"
+            type="number"
+            name="stock"
+            value={producto?.stock || ""}
+            onChange={handleDataChange}
+            placeholder="Stock"
+          />
+          <br />
           <h4>Categoría *</h4>
-          <input className="cajas" name="categoria" value={producto?.categoria || ""} onChange={handleDataChange} placeholder="Categoría" /><br/>
+          <input
+            className="cajas"
+            name="categoria"
+            value={producto?.categoria || ""}
+            onChange={handleDataChange}
+            placeholder="Categoría"
+          />
+          <br />
           <h4>Artesano *</h4>
-          <select className="cajas" name="artesano" value={producto?.artesano || ""} onChange={handleDataChange}>
+          <select
+            className="cajas"
+            name="artesano"
+            value={producto?.artesano || ""}
+            onChange={handleDataChange}
+          >
             <option value="">Seleccione un artesano</option>
             {artesanos.map((artesano) => (
-              <option key={artesano.id} value={artesano.id}>{artesano.nombre}</option>
+              <option key={artesano.id} value={artesano.id}>
+                {artesano.nombre}
+              </option>
             ))}
-          </select><br/>
+          </select>
+          <br />
           <h4>Estado *</h4>
-          <select className="seleccion" name="estado" value={producto?.estado || ""} onChange={handleDataChange}>
+          <select
+            className="seleccion"
+            name="estado"
+            value={producto?.estado || ""}
+            onChange={handleDataChange}
+          >
             <option value="publicado">Publicado</option>
             <option value="no_publicado">No Publicado</option>
-          </select><br/>
-          <button className="botones" onClick={handleDataSubmit}>
+          </select>
+          <br />
+
+          <div className="acciones-formulario">
+          <button  onClick={handleDataSubmit}>
             ✎ Guardar Cambios
           </button>
-          <button className="botones" onClick={() => setIsEditing(false)}>
+          <button  onClick={() => setIsEditing(false)}>
             Cerrar
           </button>
+          </div>
         </div>
+        </div>
+        
       )}
 
-      <table border="1">
-        <thead>
-          <tr>
-            <th onClick={() => handleSort("nombre")}>Nombre</th>
-            <th onClick={() => handleSort("precio")}>Precio</th>
-            <th onClick={() => handleSort("descripcion")}>Descripción</th>
-            <th onClick={() => handleSort("material")}>Material</th>
-            <th onClick={() => handleSort("stock")}>Stock</th>
-            <th onClick={() => handleSort("estado")}>Estado</th>
-            <th onClick={() => handleSort("categoria")}>Categoría</th>
-            <th>Imagen</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {productos.map((producto) => (
-            <tr key={producto.id}>
-              <td>{producto.nombre}</td>
-              <td>{producto.precio}</td>
-              <td>{producto.descripcion}</td>
-              <td>{producto.material}</td>
-              <td>{producto.stock}</td>
-              <td>{producto.estado}</td>
-              <td>{producto.categoria}</td>
-              <td>
-                {producto.fotos && producto.fotos.length > 0 ? (
-                  producto.fotos.map((foto, index) => (
-                    <img
-                      key={index}
-                      src={foto.ubicacion}
-                      alt={`Imagen de ${producto.nombre}`}
-                      style={{ width: "100px", marginRight: "5px" }}
-                    />
-                  ))
-                ) : (
-                  "Sin imagen"
-                )}
-              </td>
-              <td>
-                <button className="botones" onClick={() => setIsEditing(true)}>✎ Editar</button>
-                <button className="botones" onClick={() => borrarProducto(producto.id)}>🗑 Borrar</button>
-                 {/* Input de archivo oculto y botón para abrir el explorador de archivos */}
-              <input
-                type="file"
-                multiple
-                style={{ display: "none" }}
-                ref={(el) => (fileInputRefs.current[producto.id] = el)} // Referenciar el input por producto
-                onChange={(event) => handleImageUploadEdited(producto.id, event)}
-              />
-                <button
-                className="botones"
-                onClick={() => fileInputRefs.current[producto.id]?.click()} // Hacer clic en el input usando el ref
-              >
-                🖼 Subir Imágenes
-              </button>
-                            </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+<div className="productos-container">
+  {filteredProductos.map((producto) => (
+    <div className="producto-card" key={producto.id}>
+      <h3>{producto.nombre}</h3>
+      <p><strong>Precio:</strong> ${producto.precio}</p>
+      <p><i>"{producto.descripcion}" </i></p>
+      <p><strong>Material:</strong> {producto.material}</p>
+      <p><strong>Stock:</strong> {producto.stock}</p>
+      <p><strong>Estado:</strong> {producto.estado}</p>
+      <p><strong>Categoría:</strong> {producto.categoria}</p>
+      <div className="imagenes">
+        {producto.fotos && producto.fotos.length > 0 ? (
+          producto.fotos.map((foto, index) => (
+            <img
+              key={index}
+              src={foto.ubicacion}
+              alt={`Imagen de ${producto.nombre}`}
+              style={{ width: "100px", marginRight: "5px" }}
+            />
+          ))
+        ) : (
+          "Sin imagen"
+        )}
+      </div>
+      <div className="acciones-botones-artesanias">
+        <button id="boton-editar" onClick={() => setIsEditing(true)}>✎ Editar</button>
+        <button id="boton-eliminar" onClick={() => borrarProducto(producto.id)}>🗑 Borrar</button>
+      </div>
+    </div>
+  ))}
+</div>
+
     </div>
   );
 };
