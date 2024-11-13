@@ -1,0 +1,59 @@
+.ver-nodes-main-content {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .ver-nodes-busqueda {
+    width: 60%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .ver-nodes-boton-buscar {
+    padding: 10px 20px;
+    background-color: #873287;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .ver-nodes-boton-buscar:hover {
+    background-color: #6a2574;
+  }
+  
+  .ver-nodes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .ver-nodes-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .ver-nodes-card:hover {
+    transform: scale(1.05);
+    border-color: #873287; /* Cambia el color del borde al hacer hover */
+  }
+  
+  .ver-nodes-card-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .ver-nodes-card-nombre {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  

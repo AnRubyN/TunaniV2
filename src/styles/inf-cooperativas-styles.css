@@ -15,22 +15,26 @@
 }
 
 .caja-titulo-cooperativa{
-    grid-column: 1/ span 2; /* cuantas columnas quiero que ocupe ese contenedor */  
-    font-size: 32px;
+    grid-column: 1/ span 2; /* cuantas columnas quiero que ocupe ese contenedor */
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 2rem;
     font-weight: bold;
     padding: 30px;
 }
 
 .texto-cooperativa{
-    margin-left: 100px;
-    margin-right: 5%;
-    font-size: 20px;
+    font-family: 'Century Gothic', sans-serif;
+    margin-left: 6rem;
+    margin-right: 8%;
+    margin-top: 2%;
+    font-size: 1.2rem;
     text-align: left;
-    align-items: center;
+    align-items:first baseline;
 }
 
 .caja3 img{
     width: 100%;
     height: 90%;
-    margin: 4%;
+    margin: 1rem;
+    border-radius: 1.5rem;
 }

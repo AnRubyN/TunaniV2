@@ -16,17 +16,24 @@ header {
 .titulo2 a{
     color: black;
     text-decoration: none;
+    margin-left: -1rem;
 }
 .inicio-sesion a{
     text-decoration: none;
     color: #873287;
 }
 
+.cat1{
+    height: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 3.5rem;
+}
+
 .cat1:hover {
-    background-color: #280D38;
-    width: 100%;
-    height: 100%;
-    padding-top: 3px;
+    background-color: #381d0d;
+    width: 70%;
+    height: 2rem;
 }
 
 .grid-layout-header{
@@ -61,15 +68,15 @@ header {
 }
 
 .logo{
-    width: 50px;
-    height: 50px;
-
+    width: 60px;
+    height: 60px;
+    margin-top: -.5rem;
 }
 
 .logo-idioma, .logo-soporte, .logo-bolsa {
     justify-self: start; /* Alinea el div al inicio de la celda horizontalmente */
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     align-self: center; /* Alinea el div al inicio de la celda verticalmente */
 
 }
@@ -85,6 +92,7 @@ header {
     font-size: 16px;
     /* Sombra interna estilo 3D */
     box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    margin-right: 15rem;
 }
 
 .inicio-sesion {
@@ -103,7 +111,6 @@ header {
     padding: 0; /* Quita el padding predeterminado */
     margin: 0; /* Quita el margen predeterminado */
     background-color: transparent; /* Asegura que el fondo sea transparente */
-
 }
 
 

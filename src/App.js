@@ -3,6 +3,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Inicio from './pages/inicio';
 import LoginPage from './pages/LoginPage';
+import InformacionCooperativaPage from './pages/InformacionCooperativaPage';
+import VerCooperativaPage from './pages/VerCooperativaPage';
+import VerNodesPage from './pages/VerNodesPage';
+import DetallesCooperativaPage from './pages/DetallesCooperativaPage';
+import DetallesIntegrantePage from './pages/DetallesIntegrantePage';
 import Artesanos from './components/ArtesanosComponente';
 import RepresentanteLayout from "./layouts/RepresentanteLayout"; // Asume la ruta correcta aquí
 import ComponenteGestionProductos from './components/ComponenteGestionProductos';
@@ -27,18 +32,46 @@ function App() {
       <AuthProvider>
       <Routes>
         
+<<<<<<< Updated upstream
         <Route path="/" element={<Inicio />} />
+=======
+        <Route path="/" element={<InicioLayout />}>
+            <Route index element={<Inicio />} />
+            <Route path="producto/:id" element={<ProductoPage />} />
+            <Route path="carrito" element={<CarritoPage />} />
+            <Route path="cesta" element={<ComponenteCesta />} />
+        </Route>
+
+        {/* Ruta para la información de cooperativas fuera del InicioLayout */}
+        <Route path="informacion-cooperativa" element={<InformacionCooperativaPage />} />
+        <Route path="ver-cooperativa" element={<VerCooperativaPage />} />
+        <Route path="ver-nodes" element={<VerNodesPage />} />
+        <Route path="detalles-cooperativa/:id" element={<DetallesCooperativaPage />} />
+        <Route path="detalles-integrante/:id" element={<DetallesIntegrantePage />} />
+
+>>>>>>> Stashed changes
         <Route path="perfilUsuario" element={<ComponentePerfilUsuario/>} /> // Ruta para el perfil del usuario
         
         <Route path="datosDeposito" element={<ComponenteImprimirDatosDeposito />} /> // Ruta para el ticket de los datos de compra para deposito
         <Route path="datosFormaPago" element={<ComponenteFormaPago />} /> // Ruta para selelcionar el
 
         <Route path="/login" element={<LoginPage />} />
+<<<<<<< Updated upstream
         <Route path="/representante" element={
           //<ProtectedRoute>        
           <RepresentanteLayout />
           //</ProtectedRoute>
         }>
+=======
+
+          {/* Rutas protegidas para el representante */}
+          <Route path="/representante/*" element={
+            <ProtectedRoute>
+              <RepresentanteLayout />
+            </ProtectedRoute>
+          }>
+
+>>>>>>> Stashed changes
              <Route path="artesanos" element={<Artesanos />} />
              <Route path="artesanias" element={<ComponenteGestionProductos/>} />
              <Route path="perfilCooperativa" element={<ComponenteCooperativa />} />

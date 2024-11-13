@@ -47,7 +47,7 @@ const ComponenteHeader = () => {
                     />
                 </div>
                 <div className="titulo2">
-                    <a href="home.js">Tunani</a>
+                    <a href="/">Tunani</a>
                 </div>
                 <div className="logo-soporte">
                     <a href="soporte.js">

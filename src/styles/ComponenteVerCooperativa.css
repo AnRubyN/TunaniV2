@@ -1,0 +1,68 @@
+.ver-cooperativa-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .ver-cooperativa-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .imagen-tarjeta {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen sin distorsionarla */
+    border-radius: 5px; /* Opcional: redondea las esquinas */
+  }
+  
+  
+  .ver-cooperativa-barra-busqueda {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .ver-cooperativa-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .ver-cooperativa-card {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+  }
+  
+  .ver-cooperativa-card:hover {
+    border-color: #873287; /* Cambia el color del borde al hacer hover */
+  }
+  
+  .ver-cooperativa-card-imagen {
+    width: 100%;
+    height: 150px;
+    background-color: #eee; /* Fondo gris como marcador de posición */
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .ver-cooperativa-card-imagen:hover{
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño de la imagen al pasar el mouse */
+  }
+
+  .ver-cooperativa-card-imagen img{
+    height: 100%;
+    width: 100%;
+  }
+  
+  .ver-cooperativa-card-texto {
+    font-size: 1rem;
+    font-weight: medium;
+    color: #333;
+  }
+  

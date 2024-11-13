@@ -4,15 +4,25 @@
     position: relative;
     width: 956px;
     margin: 30px auto; /* Centra la barra de búsqueda */
+<<<<<<< Updated upstream
     height: 77px;
     background-color: rgba(246, 244, 255, 1);
+=======
+    height: 3.5rem;
+    background-color: rgb(255, 255, 255);
+>>>>>>> Stashed changes
     display: flex;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Agrega un ligero sombreado */
     border-radius: 10px;
+<<<<<<< Updated upstream
     padding: 15px;
     margin-bottom: 3rem;
     margin-top: -5rem;
+=======
+    padding-left: 15px;
+    margin-top: 6rem;
+>>>>>>> Stashed changes
   }
   
   .barra-busqueda {
@@ -21,19 +31,19 @@
     height: 100%;
     border: none;
     font-family: 'Century Gothic', sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     border-radius: 10px;
   }
   
   .boton-buscar {
     position: relative;
-    height: 80px;
+    height: 3.5rem;
     background-color: #873286;
     color: #FFFFFF;
     font-family: 'Roboto Slab', serif;
     font-size: 24px;
     font-weight: bold;
-    border: none;
+    margin-bottom: 1.2rem;
     cursor: pointer;
     border-radius: 10px;
     transition: background-color 0.3s;
