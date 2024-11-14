@@ -1,0 +1,245 @@
+/* Contenedor principal */
+.contenedor-cuadros {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.imagen-tarjeta {
+  width: 120px;
+  height: 17px;
+  margin-bottom: 15px;
+}
+
+.cuadro1, .cuadro2, .cuadro3 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.checkbox{
+  margin-top: 2rem;
+}
+.checkbox-label label{
+  margin-left: 1rem;
+}
+
+/* Estilos de los botones */
+.boton-guardar-direccion .pagar .cancelar .aplicar .botonSelect .botonEdit {
+  padding: 12px 25px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.pagar {
+  background-color: #e60000;
+  color: #fff;
+}
+
+.pagar:hover {
+  background-color: #d02a2a;
+  transform: scale(1.05);
+}
+
+.cancelar {
+  background-color: #bc06c6;
+  color: #fff;
+}
+
+.cancelar:hover {
+  background-color: #873287;
+  transform: scale(1.05);
+}
+
+.aplicar {
+  background-color: #bc06c6;
+  color: white;
+}
+
+.aplicar:hover {
+  background-color: #873287;
+  transform: scale(1.05);
+}
+
+.tarjeta, .codigo {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f6f6f6;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.botonSelect, .botonEdit {
+  width: 100%;
+  background-color: #bc06c6;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.botonSelect:hover, .botonEdit:hover {
+  background-color: #873287;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el modal */
+  width: 80%;
+  max-width: 500px;  /* Limitar el ancho máximo del modal */
+  background: rgba(232, 230, 233, 0.5);  /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;  /* Permite desplazamiento si el contenido es demasiado largo */
+  box-sizing: border-box;
+}
+
+/* Cierre del modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* Estilos del formulario dentro del modal */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1); /* sombra suave */
+}
+
+/* Estilo cuando el input recibe foco */
+input[type="text"]:focus {
+  border-color: #bc06c6;  /* Color de borde cuando el input está en foco */
+  background-color: #fff;  /* Cambiar el color de fondo */
+  box-shadow: 0 0 8px rgba(188, 6, 198, 0.4);  /* Añadir sombra suave alrededor del input */
+  outline: none;  /* Eliminar el borde predeterminado de foco */
+}
+
+.boton-guardar-direccion {
+  background-color: #bc06c6;
+  padding: 12px 25px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  grid-column: span 2; /* El botón ocupa ambas columnas */
+}
+
+.boton-guardar-direccion:hover {
+  background-color: #873287;
+  transform: scale(1.05);
+}
+
+/* Estilos del resumen de pago y botones en la parte derecha */
+.cuadro3 {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+.payment-success-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.payment-success {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-success svg {
+  margin-bottom: 20px;
+}
+
+.payment-success h3 {
+  margin: 10px 0;
+  color: green;
+}
+
+.payment-success p {
+  color: #333;
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+  form {
+    grid-template-columns: 1fr; /* Coloca todos los campos en una sola columna */
+  }
+
+  .modal-content {
+    width: 90%; /* Hace que el modal ocupe el 90% del ancho de la pantalla */
+  }
+}

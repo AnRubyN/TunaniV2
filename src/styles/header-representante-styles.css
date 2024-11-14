@@ -1,0 +1,140 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 100%;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100vw; /* 100% del ancho de la ventana */
+    z-index: 1000; /* Asegura que el header se muestre sobre otros elementos */
+  }
+  
+.titulo2 a{
+    color: black;
+    text-decoration: none;
+    margin-left: -1rem;
+}
+.inicio-sesion a{
+    text-decoration: none;
+    color: #873287;
+}
+
+.cat1{
+    height: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 3.5rem;
+}
+
+.cat1:hover {
+    background-color: #381d0d;
+    width: 70%;
+    height: 2rem;
+}
+
+.grid-layout-header{
+    display: grid;
+    grid-template-columns: auto; /* 2 columnas */
+    /* 1fr para la fila que debe expandirse y llenar el espacio restante */
+    grid-template-rows: 50px;
+    width: 100vw; /* 100% del ancho de la ventana */
+    justify-content: stretch;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden; /*Impide el scroll en el grid-layout */
+    background-color: aqua;
+}
+
+.grid-layout-cabecera{
+    display: grid;
+    grid-column: 1/ span 2; /* cuantas columnas quiero que ocupe ese contenedor */  
+    background-color: #E6D5FF;
+    grid-template-columns: 5% 40% 30% auto auto auto auto auto;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    color: white;
+    
+}
+
+.titulo2{
+    font-family: 'Roboto Slab';
+    color:black;
+    font-size: 45px;
+    margin-right: 17rem;
+}
+
+.logo{
+    width: 60px;
+    height: 60px;
+    margin-top: -.5rem;
+}
+
+.logo-idioma, .logo-soporte, .logo-bolsa {
+    justify-self: start; /* Alinea el div al inicio de la celda horizontalmente */
+    width: 35px;
+    height: 35px;
+    align-self: center; /* Alinea el div al inicio de la celda verticalmente */
+
+}
+
+#cajaBuscador{
+    width: 60%; /* Por defecto */
+    height: 30px;
+    padding: 10px;
+    border: none;
+    background-color: #E6D5FF;
+    outline: none;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 16px;
+    /* Sombra interna estilo 3D */
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    margin-right: 15rem;
+}
+
+.inicio-sesion {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 16px;
+    color: #873287;
+    padding-right: 20px;
+    background: none; /* Quita el fondo */
+    border: none; /* Quita los bordes */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    outline: none; /* Quita el borde que aparece al enfocar el botón */
+    box-shadow: none; /* Elimina cualquier sombra que pueda tener */
+    -webkit-appearance: none; /* Quita el aspecto predeterminado en navegadores WebKit */
+    -moz-appearance: none; /* Quita el aspecto predeterminado en navegadores Firefox */
+    appearance: none; /* Quita el aspecto predeterminado del botón */
+    padding: 0; /* Quita el padding predeterminado */
+    margin: 0; /* Quita el margen predeterminado */
+    background-color: transparent; /* Asegura que el fondo sea transparente */
+}
+
+
+.boton-inicio-sesion{
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 16px;
+    color: #873287;
+    padding-right: 20px;
+    background: none; /* Quita el fondo */
+    border: none; /* Quita los bordes */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    outline: none; /* Quita el borde que aparece al enfocar el botón */
+}
+
+
+
+.caja3 {
+    margin-right: 100px;
+}
+
+/* Ajustes generales para todas las imágenes para asegurar la responsividad */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}

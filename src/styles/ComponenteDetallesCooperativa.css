@@ -1,0 +1,85 @@
+.detalles-cooperativa-container {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .detalles-cooperativa-titulo {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .detalles-cooperativa-subtitulo, .detalles-cooperativa-region {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .detalles-cooperativa-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  
+  .detalles-cooperativa-imagen {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 3rem;
+  }
+  
+  .detalles-cooperativa-descripcion {
+    flex: 1;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    max-width: 500px;
+  }
+  
+  .detalles-cooperativa-subtitulo-integrantes {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 3rem;
+    /*margin-right: 52rem;*/
+  }
+  
+  .integrantes-cooperativa {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 20px; /* Espacio entre las imágenes */
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .integrante-card {
+    text-align: center;
+  }
+  
+  .integrante-imagen {
+    width: 10rem; /* Tamaño más grande */
+    height: 10rem;
+    margin-top: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .integrante-imagen:hover {
+    transform: scale(1.1);
+  }
+  
+  .integrante-nombre {
+    font-size: 14px;
+    color: #333;
+    margin-top: 5px;
+  }
+  

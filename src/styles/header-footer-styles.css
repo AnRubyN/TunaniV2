@@ -1,0 +1,307 @@
+
+/* Contenedor del menú desplegable */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    
+}
+
+/* Contenido del menú desplegable */
+.user-dropdown .dropdown-content {
+    display: none;
+    position: fixed; /* Cambiado a fixed */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9999; /* Asegura que esté al frente */
+    border-radius: 7px;
+    top: 40px; /* Ajusta esta posición según la altura del menú */
+    right: 5px; /* Ajusta esta posición si es necesario */
+}
+
+/* Mostrar el menú desplegable al pasar el cursor */
+.user-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilos para los enlaces dentro del menú desplegable */
+.user-dropdown .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Añade una transición suave para el color de fondo y el tamaño */
+
+}
+
+/* Efecto hover para los enlaces del menú */
+.user-dropdown .dropdown-content a:hover {
+    transform: scale(1.05); /* Aumenta el tamaño al pasar el cursor */
+}
+
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .user-dropdown .dropdown-content {
+        right: 0;
+    }
+}
+
+
+.grid-layout-header {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 100%;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100vw; /* 100% del ancho de la ventana */
+    z-index: 1000; /* Asegura que el header se muestre sobre otros elementos */
+  }
+  
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw; /* 100% del ancho de la ventana */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 1000; /* Asegura que el footer se muestre sobre otros elementos */
+  }
+
+.grid-layout-categorias a{
+    color: white;
+    text-decoration: none;
+}
+
+.grid-layout-footer a{
+    color: white;
+    text-decoration: none;
+}
+.titulo2 a{
+    color: black;
+    text-decoration: none;
+    
+}
+.inicio-sesion {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 16px;
+    color: #873287;
+    padding-right: 20px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer; /* Cambia el cursor a mano para indicar que es clickeable */
+    transition: color 0.3s ease; /* Agrega transición para el color */
+}
+
+.inicio-sesion:hover {
+    color: #da70d6; /* Cambia el color al pasar el mouse */
+}
+
+.inicio-sesion:focus {
+    color: #da70d6; /* Cambia el color al enfocar el botón, para accesibilidad */
+    outline: none; /* Asegura que no hay un contorno al enfocar */
+}
+
+.inicio-sesion:active {
+    color: #ba55d3; /* Cambia el color al hacer clic en el botón */
+}
+
+.cat1 {
+    background-color: #873287; /* Change the background color */
+    padding: 10px; /* Add some padding */
+    margin: 5px; /* Add some margin */
+    border-radius: 5px; /* Round the corners */
+    text-align: center; /* Center the text */
+}
+
+.cat1:hover {
+    background-color: #38190d;
+    width: 100%;
+    height: 100%;
+    padding-top: 3px;
+}
+
+.grid-layout-header{
+    display: grid;
+    grid-template-columns: auto; /* 2 columnas */
+    /* 1fr para la fila que debe expandirse y llenar el espacio restante */
+    grid-template-rows: 100px 50px;
+    width: 100vw; /* 100% del ancho de la ventana */
+    justify-content: stretch;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden; /*Impide el scroll en el grid-layout */
+    background-color: aqua;
+}
+
+.grid-layout-categorias{
+    display: grid;
+    grid-column: 1/ span 2; /* cuantas columnas quiero que ocupe ese contenedor */  
+    background-color: #873287;
+    grid-template-columns: auto auto auto auto auto auto auto auto ;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    color: white;
+    
+}
+
+.combo-box-categorias {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    background-color: #873287;
+    border: none;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+}
+
+.combo-box-categorias option{
+    background-color: white;
+    color: #873287;
+    width: 100px;
+    height: 100px;
+}
+
+
+.grid-layout-cabecera{
+    display: grid;
+    grid-column: 1/ span 2; /* cuantas columnas quiero que ocupe ese contenedor */  
+    background-color: #E6D5FF;
+    grid-template-columns: 7% 24% 40% auto auto auto auto auto;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    color: white;
+}
+
+.grid-layout-footer {
+    display: grid;
+    text-align: left;
+    height: 40px; 
+    width: 100vw; /* 100% del ancho de la ventana */
+    width: 100%; /* 100% del ancho de la ventana */
+    padding-top: 12px;
+    padding-left: 10px;
+    background-color: rgb(0, 0, 0);   
+}
+
+
+
+.titulo2{
+    font-family: 'Roboto Slab';
+    color:black;
+    font-size: 64px;
+    margin-right: 17rem;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+
+}
+
+.logo-idioma, .logo-soporte, .logo-bolsa {
+    justify-self: start; /* Alinea el div al inicio de la celda horizontalmente */
+    width: 35px;
+    height: 35px;
+    align-self: center; /* Alinea el div al inicio de la celda verticalmente */
+
+}
+
+
+
+
+#cajaBuscador{
+    width: 80%; /* Por defecto */
+    height: 30px;
+    padding: 10px;
+    border: none;
+    background-color: #E6D5FF;
+    outline: none;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 16px;
+    /* Sombra interna estilo 3D */
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Contenido */
+
+.grid-layout-contenido{
+    display: grid;
+    grid-template-columns: 60% 40%; /* 2 columnas */
+    grid-template-rows: 100px auto;
+    width: 100vw; /* 100% del ancho de la ventana */
+    justify-content: stretch;
+    margin: 0 auto;
+    text-align: center;
+     /* Ajusta este valor según la altura real de tu header */
+    margin-top: 150px;
+    /* Agrega un margen inferior si es necesario, dependiendo de la altura de tu footer */
+    margin-bottom: 60px;
+}
+
+.caja-titulo-cooperativa{
+    grid-column: 1/ span 2; /* cuantas columnas quiero que ocupe ese contenedor */  
+    font-size: 32px;
+    font-weight: bold;
+    padding: 30px;
+}
+/* contenido e imagen */
+
+.texto-cooperativa{
+    margin-left: 100px;
+    margin-right: 5%;
+    font-size: 20px;
+    text-align: left;
+    align-items: center;
+}
+
+.caja3 img{
+    width: 100%;
+    height: 90%;
+    margin: 4%;
+}
+
+.caja3 {
+    margin-right: 100px;
+}
+
+/* Ajustes generales para todas las imágenes para asegurar la responsividad */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Estilo base para los íconos */
+.logo-soporte img,
+.logo-idioma img,
+.logo-bolsa img {
+    transition: transform 0.2s ease; /* Transición suave */
+}
+
+/* Efecto de hover */
+.logo-soporte img:hover,
+.logo-idioma img:hover,
+.logo-bolsa img:hover {
+    transform: scale(1.1); /* Aumenta el tamaño un 10% al pasar el cursor */
+}
+
+/* Efecto de clic */
+.logo-soporte img:active,
+.logo-idioma img:active,
+.logo-bolsa img:active {
+    transform: scale(1.1); /* Aumenta el tamaño un 10% al hacer clic */
+}
